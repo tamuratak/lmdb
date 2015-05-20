@@ -11,7 +11,8 @@ module LMDB
     #      puts "at #{key}: #{value}"
     #    end
     def each
-      cursor do |c|
+      env.transaction do
+      c = cursor
         while i = c.next
           yield(i)
         end
